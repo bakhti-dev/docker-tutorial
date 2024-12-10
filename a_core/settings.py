@@ -16,9 +16,9 @@ SECRET_KEY = env('SECRET_KEY', default='secret_key')
 
 DEBUG = DEV_ENVIRON
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'docker-tutorial.up.railway.app']
 
-CSRF_TRUSTED_ORIGINS = [ 'https://*' ]
+CSRF_TRUSTED_ORIGINS = ['https://docker-tutorial.up.railway.app']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
