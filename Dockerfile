@@ -15,8 +15,9 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the project
+# Copy the project and the start script
 COPY . /app/
+COPY start_beat_flower.sh /app/start_beat_flower.sh
 
 # Change ownership of the application files
 RUN chown -R celery:celery /app

@@ -51,21 +51,12 @@ services:
       - redis
       - app
 
-  flower:
+  beat_flower:
     image: my-app-image
-    container_name: my-flower-container
-    command: celery -A a_core flower --basic_auth=admin:1212
+    container_name: my-beat-flower-container
+    command: ./start_beat_flower.sh
     ports:
-      - "5555:5555"
-    env_file:
-      - ./a_core/.env
-    depends_on:
-      - redis
-
-  beat:
-    image: my-app-image
-    container_name: my-beat-container
-    command: celery -A a_core beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+      - "5555:5555"  # Flower UI
     volumes:
       - .:/app
     env_file:
@@ -73,6 +64,29 @@ services:
     depends_on:
       - redis
       - app
+
+  # flower:
+  #   image: my-app-image
+  #   container_name: my-flower-container
+  #   command: celery -A a_core flower --basic_auth=admin:1212
+  #   ports:
+  #     - "5555:5555"
+  #   env_file:
+  #     - ./a_core/.env
+  #   depends_on:
+  #     - redis
+
+  # beat:
+  #   image: my-app-image
+  #   container_name: my-beat-container
+  #   command: celery -A a_core beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+  #   volumes:
+  #     - .:/app
+  #   env_file:
+  #     - ./a_core/.env
+  #   depends_on:
+  #     - redis
+  #     - app
 
 volumes:
   postgres_data:
